@@ -3,18 +3,33 @@
 A small open-source web tool to build a CV with a live A4 preview and PDF
 export. Single-file, single-user, no backend.
 
+### → [Open the CV Builder](https://paulriisk.github.io/cv-builder/)
+
 ![CV Builder screenshot](public/cv-builder-example.png)
 
+## Features
+
 - Fill the form on the left, see a live A4 preview on the right.
-- Switch between Blue / Teal / Rust theme presets, or pick a custom accent
-  color.
+- Two layout modes: **Dev** (with `>` and `//` accents) and **Classic**
+  (clean, capitalized headings).
+- Theme presets (Blue / Teal / Rust) plus a custom accent color picker.
+- Light and dark mode for the editor UI; the CV preview stays light.
+- Optional profile photo with a one-click on/off toggle.
 - Save your data to a JSON file, load it back later.
 - Export the preview as an A4 PDF.
 
-Your data is auto-saved to the browser's `localStorage`. The profile photo
-is never persisted — you re-upload it after loading a saved file.
+## Privacy
 
-## Setup
+This is a non-commercial, single-page tool. Nothing leaves your browser:
+
+- All form data is stored in your browser's `localStorage`.
+- The profile photo is held in memory only — not in `localStorage`, not in
+  the exported JSON. You re-upload it after loading a saved file.
+- No analytics, no cookies, no tracking, no backend.
+- Fonts are bundled with the app, so the page makes no third-party
+  requests at runtime.
+
+## Run locally
 
 Requirements: Node 18+.
 
@@ -55,7 +70,8 @@ site), change `base` accordingly.
 ## Tech
 
 React + TypeScript + Vite, plain CSS with CSS variables, html2pdf.js for
-export. State lives in a single `useReducer` exposed via Context.
+export. Self-hosted fonts via `@fontsource`. State lives in a single
+`useReducer` exposed via Context.
 
 ## License
 

@@ -2,6 +2,7 @@ import { useCV } from "../state/CVContext";
 
 export function PreviewMain() {
   const doc = useCV();
+  const prefix = doc.mode === "dev" ? "// " : "";
 
   return (
     <section className="main">
@@ -10,7 +11,8 @@ export function PreviewMain() {
           <h2
             className={`sec-label main-sec${sectionIndex > 0 ? " mt" : ""}`}
           >
-            // {section.heading}
+            {prefix}
+            {section.heading}
           </h2>
           {section.entries.map((entry) => (
             <article className="exp" key={entry.id}>

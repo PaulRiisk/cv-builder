@@ -56,3 +56,32 @@
   background: var(--ui-border);
   margin: 0 4px;
 }
+
+.mode-switcher {
+  display: inline-flex;
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mode-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  background: var(--ui-surface);
+  border: none;
+  cursor: pointer;
+  color: var(--ui-text);
+}
+
+.mode-btn + .mode-btn {
+  border-left: 1px solid var(--ui-border-strong);
+}
+
+.mode-btn:hover {
+  background: var(--ui-hover);
+}
+
+.mode-btn.active {
+  background: var(--ui-focus);
+  color: #fff;
+}

@@ -1,5 +1,6 @@
 import { ThemePresets } from "./ThemePresets";
 import { ColorPicker } from "./ColorPicker";
+import { ModeSwitcher } from "./ModeSwitcher";
 import { useUiTheme } from "./useUiTheme";
 import "./topbar.css";
 
@@ -17,6 +18,8 @@ export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
   return (
     <header className="topbar">
       <h1>CV Builder</h1>
+      <ModeSwitcher />
+      <span className="topbar-divider" />
       <ThemePresets />
       <span className="topbar-divider" />
       <ColorPicker />

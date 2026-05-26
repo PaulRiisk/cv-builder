@@ -6,6 +6,8 @@ const STORAGE_KEY = "cv-builder-v1";
 function regenerateIds(doc: CVDocument): CVDocument {
   return {
     ...doc,
+    mode: doc.mode ?? "dev",
+    photoEnabled: doc.photoEnabled ?? true,
     contact: doc.contact.map((row) => ({ ...row, id: newId() })),
     skillGroups: doc.skillGroups.map((g) => ({ ...g, id: newId() })),
     sidebarSections: doc.sidebarSections.map((s) => ({

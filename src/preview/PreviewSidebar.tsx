@@ -16,14 +16,20 @@ function renderName(name: string) {
 
 export function PreviewSidebar({ photoUrl }: { photoUrl: string }) {
   const doc = useCV();
+  const isDev = doc.mode === "dev";
+  const prefix = isDev ? "// " : "";
 
   return (
     <aside className="sidebar">
-      <img className="photo" src={photoUrl} alt={doc.name} />
+      {doc.photoEnabled && (
+        <img className="photo" src={photoUrl} alt={doc.name} />
+      )}
 
       <h1 className="name">{renderName(doc.name)}</h1>
       <div className="title">
-        <span className="caret">&gt;</span> {doc.title}
+        {isDev && <span className="caret">&gt;</span>}
+        {isDev ? " " : ""}
+        {doc.title}
       </div>
 
       {doc.contact.length > 0 && (
@@ -39,14 +45,17 @@ export function PreviewSidebar({ photoUrl }: { photoUrl: string }) {
 
       {doc.profile.trim() !== "" && (
         <>
-          <h2 className="sec-label">// profile</h2>
+          <h2 className="sec-label">{prefix}profile</h2>
           <p className="profile">{doc.profile}</p>
         </>
       )}
 
       {doc.skillGroups.map((group) => (
         <div key={group.id}>
-          <h2 className="sec-label">// {group.heading}</h2>
+          <h2 className="sec-label">
+            {prefix}
+            {group.heading}
+          </h2>
           <div className="chips">
             {group.items.map((item, i) => (
               <span className="chip" key={i}>
@@ -59,7 +68,10 @@ export function PreviewSidebar({ photoUrl }: { photoUrl: string }) {
 
       {doc.sidebarSections.map((section) => (
         <div key={section.id}>
-          <h2 className="sec-label">// {section.heading}</h2>
+          <h2 className="sec-label">
+            {prefix}
+            {section.heading}
+          </h2>
           {section.rows.map((row) => (
             <div className="lang" key={row.id}>
               <span className="lang-key">{row.label}:</span>{" "}

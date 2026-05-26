@@ -4,6 +4,7 @@ import type {
   Direction,
   Entry,
   EntrySection,
+  LayoutMode,
   SidebarRow,
   SidebarSection,
   SkillGroup,
@@ -65,6 +66,8 @@ export type Action =
     }
   | { type: "SET_THEME_PRESET"; preset: ThemePreset; accent: string }
   | { type: "SET_ACCENT"; accent: string }
+  | { type: "SET_MODE"; mode: LayoutMode }
+  | { type: "SET_PHOTO_ENABLED"; enabled: boolean }
   | { type: "LOAD_DOCUMENT"; doc: CVDocument }
   | { type: "RESET" };
 
@@ -341,6 +344,11 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
       };
     case "SET_ACCENT":
       return { ...state, theme: { ...state.theme, accent: action.accent } };
+
+    case "SET_MODE":
+      return { ...state, mode: action.mode };
+    case "SET_PHOTO_ENABLED":
+      return { ...state, photoEnabled: action.enabled };
 
     case "LOAD_DOCUMENT":
       return action.doc;

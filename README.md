@@ -3,6 +3,8 @@
 A small open-source web tool to build a CV with a live A4 preview and PDF
 export. Single-file, single-user, no backend.
 
+![CV Builder screenshot](public/cv-builder-example.png)
+
 - Fill the form on the left, see a live A4 preview on the right.
 - Switch between Blue / Teal / Rust theme presets, or pick a custom accent
   color.
@@ -34,13 +36,21 @@ Static output goes to `dist/` and can be deployed to any static host.
 ## Deploy to GitHub Pages
 
 A workflow in `.github/workflows/deploy.yml` builds and publishes `dist/` to
-GitHub Pages on every push to `main`. Enable Pages in the repository
-settings with "GitHub Actions" as the source.
+GitHub Pages on every push to `main`.
 
-If your repo is hosted at `https://<user>.github.io/<repo>/`, set the Vite
-base path before deploying — adjust `base` in `vite.config.ts` to match the
-repo name (or leave the default `/` for a custom domain or user/organization
-site).
+One-time setup:
+
+1. Push the repo to GitHub.
+2. In the repo on github.com: **Settings → Pages → Build and deployment →
+   Source: "GitHub Actions"**.
+3. If the first push happened before step 2, re-run the failed workflow
+   from the **Actions** tab.
+4. The site URL appears under Settings → Pages, e.g.
+   `https://<user>.github.io/cv-builder/`.
+
+The build base path is hardcoded to `/cv-builder/` in `vite.config.ts`. If
+you rename the repo (or use a custom domain or a `<user>.github.io` user
+site), change `base` accordingly.
 
 ## Tech
 

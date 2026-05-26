@@ -57,5 +57,7 @@ export function createDefaultDocument(): CVDocument {
       preset: "blue",
       accent: "#2046c6",
     },
+    mode: "dev",
+    photoEnabled: true,
   };
 }

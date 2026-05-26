@@ -43,6 +43,8 @@ export type Theme = {
   accent: string;
 };
 
+export type LayoutMode = "dev" | "classic";
+
 export type CVDocument = {
   version: 1;
   name: string;
@@ -53,6 +55,8 @@ export type CVDocument = {
   sidebarSections: SidebarSection[];
   entrySections: EntrySection[];
   theme: Theme;
+  mode: LayoutMode;
+  photoEnabled: boolean;
 };
 
 export type Direction = "up" | "down";

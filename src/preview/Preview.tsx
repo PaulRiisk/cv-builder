@@ -11,12 +11,13 @@ export const Preview = forwardRef<HTMLDivElement, Props>(function Preview(
   ref,
 ) {
   const doc = useCV();
-  const src = photoUrl ?? "/placeholder_cv.png";
+  const src = photoUrl ?? `${import.meta.env.BASE_URL}placeholder_cv.png`;
 
   return (
     <div
       ref={ref}
       className="cv-preview-root"
+      data-mode={doc.mode}
       style={{ ["--accent" as string]: doc.theme.accent }}
     >
       <main className="page">

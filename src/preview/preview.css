@@ -118,6 +118,14 @@
 .cv-preview-root .main-sec {
   text-transform: none;
 }
+
+/* Classic mode: capitalize headings and title, drop the lowercase rule */
+.cv-preview-root[data-mode="classic"] .sec-label {
+  text-transform: capitalize;
+}
+.cv-preview-root[data-mode="classic"] .title {
+  text-transform: capitalize;
+}
 .cv-preview-root .main-sec.mt {
   margin-top: 28px;
 }

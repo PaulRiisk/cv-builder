@@ -1,5 +1,6 @@
 import { ThemePresets } from "./ThemePresets";
 import { ColorPicker } from "./ColorPicker";
+import { useUiTheme } from "./useUiTheme";
 import "./topbar.css";
 
 type Props = {
@@ -10,6 +11,9 @@ type Props = {
 };
 
 export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
+  const [uiTheme, toggleUiTheme] = useUiTheme();
+  const isDark = uiTheme === "dark";
+
   return (
     <header className="topbar">
       <h1>CV Builder</h1>
@@ -28,6 +32,15 @@ export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
       </button>
       <button type="button" onClick={onExport}>
         Export PDF
+      </button>
+      <button
+        type="button"
+        className="theme-toggle"
+        onClick={toggleUiTheme}
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        title={isDark ? "Light mode" : "Dark mode"}
+      >
+        {isDark ? "☀" : "☾"}
       </button>
     </header>
   );

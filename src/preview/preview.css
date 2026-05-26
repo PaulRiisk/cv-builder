@@ -8,6 +8,7 @@
    ========================================================= */
 
 .cv-preview-root {
+  color-scheme: light;
   --accent: #2046c6;
   --page-bg: #f7f8fb;
   --sidebar-bg: #eef1f6;
@@ -176,7 +177,7 @@
   margin-bottom: 4px;
 }
 .cv-preview-root .exp-role {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-pri);
 }
@@ -186,6 +187,7 @@
   margin: 2px 0 6px;
 }
 .cv-preview-root .bullet {
+  font-size: 9.5px;
   margin: 3px 0;
   color: var(--text-sec);
 }

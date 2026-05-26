@@ -1,0 +1,194 @@
+/* =========================================================
+   CV Preview
+   V3 Technical · Light Theme · Blue accent
+   Ported from start/web/styles.css.
+   Tokens are scoped to .cv-preview-root so the editor UI
+   is unaffected. --accent is set per-instance and can be
+   overridden by the theme picker.
+   ========================================================= */
+
+.cv-preview-root {
+  --accent: #2046c6;
+  --page-bg: #f7f8fb;
+  --sidebar-bg: #eef1f6;
+  --text-pri: #0e1320;
+  --text-sec: #3a4254;
+  --text-muted: #7a8197;
+  --rule: #dee2eb;
+  --chip-border: #cdd3df;
+
+  --font-sans:
+    "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:
+    "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+
+  --page-w: 794px;
+  --page-h: 1123px;
+
+  font-family: var(--font-sans);
+  color: var(--text-pri);
+  font-size: 10pt;
+  line-height: 1.55;
+}
+
+.cv-preview-root *,
+.cv-preview-root *::before,
+.cv-preview-root *::after {
+  box-sizing: border-box;
+}
+
+.cv-preview-root h1,
+.cv-preview-root h2,
+.cv-preview-root h3,
+.cv-preview-root p {
+  margin: 0;
+}
+
+/* ── Page ────────────────────────────────────────────────── */
+.cv-preview-root .page {
+  width: var(--page-w);
+  min-height: var(--page-h);
+  background: var(--page-bg);
+  display: grid;
+  grid-template-columns: 34% 1fr;
+  box-shadow: 0 8px 32px rgba(14, 19, 32, 0.08);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.cv-preview-root .sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--rule);
+  padding: 56px 28px 56px 56px;
+  color: var(--text-sec);
+}
+
+.cv-preview-root .photo {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 1px solid var(--chip-border);
+  margin-bottom: 22px;
+  display: block;
+}
+
+.cv-preview-root .name {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--text-pri);
+}
+
+.cv-preview-root .title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  margin-top: 8px;
+}
+.cv-preview-root .caret {
+  color: var(--accent);
+}
+
+.cv-preview-root .contact {
+  margin-top: 28px;
+  font-size: 9.5px;
+  line-height: 1.9;
+}
+.cv-preview-root .contact-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  display: inline-block;
+  width: 64px;
+}
+
+/* ── Section labels (sidebar + main share visual) ────────── */
+.cv-preview-root .sec-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 28px;
+  margin-bottom: 12px;
+  text-transform: lowercase;
+}
+.cv-preview-root .main-sec {
+  text-transform: none;
+}
+.cv-preview-root .main-sec.mt {
+  margin-top: 28px;
+}
+.cv-preview-root .main .main-sec:first-child {
+  margin-top: 0;
+}
+
+.cv-preview-root .profile {
+  text-wrap: pretty;
+  font-size: 9.5px;
+  color: var(--text-sec);
+}
+
+/* ── Chip pills ──────────────────────────────────────────── */
+.cv-preview-root .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.cv-preview-root .chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--chip-border);
+  border-radius: 3px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-sec);
+  background: transparent;
+}
+
+/* ── Languages / sidebar key:value rows ──────────────────── */
+.cv-preview-root .lang {
+  font-size: 9.5px;
+  margin-bottom: 2px;
+}
+.cv-preview-root .lang-key {
+  color: var(--text-muted);
+}
+.cv-preview-root .mono {
+  font-family: var(--font-mono);
+}
+
+/* ── Main column ─────────────────────────────────────────── */
+.cv-preview-root .main {
+  padding: 56px 56px 56px 32px;
+}
+
+.cv-preview-root .exp {
+  margin-bottom: 22px;
+  padding-left: 14px;
+  border-left: 1px solid var(--rule);
+}
+.cv-preview-root .exp-date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.cv-preview-root .exp-role {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-pri);
+}
+.cv-preview-root .exp-company {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 2px 0 6px;
+}
+.cv-preview-root .bullet {
+  margin: 3px 0;
+  color: var(--text-sec);
+}
+.cv-preview-root .bullet::before {
+  content: "— ";
+}

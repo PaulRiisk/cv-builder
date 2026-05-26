@@ -1,0 +1,57 @@
+.theme-presets {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.preset-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.preset-swatch:hover {
+  background: #f0f0f0;
+}
+
+.preset-swatch.active {
+  border-color: #2046c6;
+  box-shadow: inset 0 0 0 1px #2046c6;
+}
+
+.preset-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.color-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.color-picker input[type="color"] {
+  width: 28px;
+  height: 24px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 20px;
+  background: #e5e5e5;
+  margin: 0 4px;
+}

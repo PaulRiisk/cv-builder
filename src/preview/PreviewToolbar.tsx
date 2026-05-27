@@ -1,10 +1,14 @@
+// small floating bar above the preview with zoom buttons
+
 type Props = {
   zoom: number;
   onZoomChange: (zoom: number) => void;
 };
 
+// fixed zoom stops, picked to feel familiar (50% to 200%)
 const STEPS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
+// move one stop up or down, clamped to the ends
 function nextStep(zoom: number, direction: 1 | -1): number {
   const idx = STEPS.findIndex((s) => s >= zoom - 0.001);
   const target =

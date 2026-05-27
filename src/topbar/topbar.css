@@ -1,8 +1,12 @@
+/* topbar control styles: presets, color picker, mode switcher */
+
+/* row of theme preset buttons */
 .theme-presets {
   display: inline-flex;
   gap: 4px;
 }
 
+/* one preset button with a colored dot */
 .preset-swatch {
   display: inline-flex;
   align-items: center;
@@ -32,6 +36,7 @@
   display: inline-block;
 }
 
+/* custom accent color picker (native input wrapped with a label) */
 .color-picker {
   display: inline-flex;
   align-items: center;
@@ -50,6 +55,7 @@
   cursor: pointer;
 }
 
+/* thin vertical separator between topbar groups */
 .topbar-divider {
   width: 1px;
   height: 20px;
@@ -57,6 +63,7 @@
   margin: 0 4px;
 }
 
+/* segmented control for layout mode (Dev / Classic) */
 .mode-switcher {
   display: inline-flex;
   border: 1px solid var(--ui-border-strong);

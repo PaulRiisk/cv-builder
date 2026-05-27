@@ -1,9 +1,13 @@
+// light/dark mode for the app chrome only, never for the CV preview
+// state is persisted in localStorage under its own key
+
 import { useEffect, useState } from "react";
 
 export type UiTheme = "light" | "dark";
 
 const STORAGE_KEY = "cv-builder-ui-theme";
 
+// read a previous choice from localStorage if there is one
 function readStored(): UiTheme | null {
   try {
     const v = localStorage.getItem(STORAGE_KEY);
@@ -13,6 +17,7 @@ function readStored(): UiTheme | null {
   }
 }
 
+// fall back to the OS preference on first visit
 function systemPreference(): UiTheme {
   if (
     typeof window !== "undefined" &&
@@ -29,6 +34,7 @@ export function useUiTheme(): [UiTheme, () => void] {
     () => readStored() ?? systemPreference(),
   );
 
+  // mirror the choice to the html data-theme attribute and localStorage
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     try {

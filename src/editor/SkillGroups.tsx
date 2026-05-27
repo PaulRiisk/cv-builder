@@ -1,3 +1,5 @@
+// editor section for skill groups, each group has a heading + chip list
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import { ChipInput } from "./ChipInput";
 
@@ -10,6 +12,7 @@ export function SkillGroups() {
       <h2>Skills</h2>
       {skillGroups.map((group, i) => (
         <div className="skill-group" key={group.id}>
+          {/* group header: rename, move, remove */}
           <div className="skill-group-header">
             <input
               type="text"
@@ -64,6 +67,7 @@ export function SkillGroups() {
               ×
             </button>
           </div>
+          {/* chips inside this group */}
           <ChipInput
             items={group.items}
             onAdd={(item) =>

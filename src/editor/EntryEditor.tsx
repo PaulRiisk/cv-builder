@@ -1,3 +1,6 @@
+// editor for a single experience or education entry
+// bullets are stored as an array but edited as one-per-line text
+
 import type { Entry } from "../types";
 import { TextField } from "./TextField";
 import { TextAreaField } from "./TextAreaField";
@@ -23,6 +26,7 @@ export function EntryEditor({
 }: Props) {
   return (
     <div className="entry-editor">
+      {/* move + remove buttons for this entry */}
       <div className="entry-header">
         <button
           type="button"

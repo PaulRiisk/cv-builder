@@ -1,3 +1,6 @@
+// chip input for skill lists: enter or click Add to create a chip
+// each chip has its own move-left, move-right and remove buttons
+
 import { useState } from "react";
 import type { Direction } from "../types";
 
@@ -11,6 +14,7 @@ type Props = {
 export function ChipInput({ items, onAdd, onRemove, onMove }: Props) {
   const [draft, setDraft] = useState("");
 
+  // local draft to allow Enter-to-submit without trimming on every keystroke
   const submit = () => {
     const value = draft.trim();
     if (!value) return;
@@ -37,6 +41,7 @@ export function ChipInput({ items, onAdd, onRemove, onMove }: Props) {
           Add
         </button>
       </div>
+      {/* rendered chips with their own controls */}
       <div className="chip-list">
         {items.map((item, i) => (
           <span className="chip-edit" key={i}>

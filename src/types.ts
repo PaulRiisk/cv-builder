@@ -1,3 +1,5 @@
+// types for the single CV document and its sub-pieces
+
 export type ContactRow = {
   id: string;
   label: string;
@@ -45,6 +47,7 @@ export type Theme = {
 
 export type LayoutMode = "dev" | "classic";
 
+// the whole CV lives in one object, gets saved and loaded as-is
 export type CVDocument = {
   version: 1;
   name: string;
@@ -61,6 +64,7 @@ export type CVDocument = {
 
 export type Direction = "up" | "down";
 
+// short random id for react keys and reducer targeting
 export function newId(): string {
   if (
     typeof crypto !== "undefined" &&

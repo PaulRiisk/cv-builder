@@ -1,3 +1,7 @@
+// preset color buttons (Blue / Teal / Rust)
+// active state checks both the preset id and the accent, so the picker
+// overriding the accent makes the preset look inactive
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import { PRESETS, PRESET_ORDER } from "../theme/presets";
 

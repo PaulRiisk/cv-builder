@@ -1,3 +1,6 @@
+// editor section for sidebar groups like languages
+// reuses the KeyValueList primitive for the row body
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import { KeyValueList } from "./KeyValueList";
 
@@ -10,6 +13,7 @@ export function SidebarSections() {
       <h2>Sidebar sections</h2>
       {sidebarSections.map((section, i) => (
         <div className="skill-group" key={section.id}>
+          {/* section header: rename, move, remove */}
           <div className="skill-group-header">
             <input
               type="text"
@@ -65,6 +69,7 @@ export function SidebarSections() {
             </button>
           </div>
 
+          {/* rows inside this section, edited like a contact list */}
           <KeyValueList
             rows={section.rows}
             addLabel="Add row"

@@ -1,8 +1,13 @@
+// localStorage hydration + JSON file save/load
+// the photo is never written here, photo lives only in app state
+
 import type { CVDocument } from "../types";
 import { newId } from "../types";
 
 const STORAGE_KEY = "cv-builder-v1";
 
+// loaded docs get fresh ids so react keys stay stable, and old fields
+// missing from saved files fall back to sensible defaults
 function regenerateIds(doc: CVDocument): CVDocument {
   return {
     ...doc,
@@ -23,6 +28,7 @@ function regenerateIds(doc: CVDocument): CVDocument {
   };
 }
 
+// loose shape check so junk in localStorage doesn't crash the app
 function isValidDocument(value: unknown): value is CVDocument {
   if (!value || typeof value !== "object") return false;
   const v = value as Record<string, unknown>;
@@ -40,6 +46,8 @@ function isValidDocument(value: unknown): value is CVDocument {
   );
 }
 
+// localStorage handlers, all wrapped in try so private mode or quota errors
+// don't take the app down
 export function loadFromLocalStorage(): CVDocument | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -56,7 +64,7 @@ export function saveToLocalStorage(doc: CVDocument): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(doc));
   } catch {
-    // Quota or disabled — silent fallback.
+    // quota or disabled, silent fallback
   }
 }
 
@@ -68,6 +76,7 @@ export function clearLocalStorage(): void {
   }
 }
 
+// turn a free-text name into a safe filename slug
 function slugify(name: string): string {
   const slug = name
     .trim()
@@ -77,6 +86,7 @@ function slugify(name: string): string {
   return slug || "cv";
 }
 
+// trigger a browser download for the current document
 export function downloadJson(doc: CVDocument): void {
   const blob = new Blob([JSON.stringify(doc, null, 2)], {
     type: "application/json",
@@ -91,6 +101,7 @@ export function downloadJson(doc: CVDocument): void {
   URL.revokeObjectURL(url);
 }
 
+// read a user-picked JSON file and validate it as a CV document
 export function readJsonFile(file: File): Promise<CVDocument> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

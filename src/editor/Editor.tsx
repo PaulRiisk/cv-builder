@@ -1,3 +1,6 @@
+// host for all editor sections in the left pane
+// each section either reads/dispatches directly or delegates to a sub-component
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import { TextField } from "./TextField";
 import { TextAreaField } from "./TextAreaField";
@@ -19,8 +22,10 @@ export function Editor({ photoUrl, onPhotoChange }: Props) {
 
   return (
     <div className="editor">
+      {/* photo lives in app state, the toggle for "show on CV" lives in the doc */}
       <PhotoField photoUrl={photoUrl} onChange={onPhotoChange} />
 
+      {/* simple top-level text fields */}
       <div className="editor-section">
         <h2>Name &amp; title</h2>
         <TextField
@@ -41,6 +46,7 @@ export function Editor({ photoUrl, onPhotoChange }: Props) {
         />
       </div>
 
+      {/* contact: same shape as sidebar rows, reuses the KeyValueList primitive */}
       <div className="editor-section">
         <h2>Contact</h2>
         <KeyValueList
@@ -59,6 +65,7 @@ export function Editor({ photoUrl, onPhotoChange }: Props) {
         />
       </div>
 
+      {/* free-form profile blurb */}
       <div className="editor-section">
         <h2>Profile</h2>
         <TextAreaField
@@ -70,6 +77,7 @@ export function Editor({ photoUrl, onPhotoChange }: Props) {
         />
       </div>
 
+      {/* bigger sub-sections, each owns its own internal layout */}
       <SkillGroups />
       <SidebarSections />
       <EntrySections />

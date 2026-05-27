@@ -1,3 +1,5 @@
+// labeled multi-line textarea, used for profile and bullet lists
+
 type Props = {
   label: string;
   value: string;

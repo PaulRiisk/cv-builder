@@ -1,3 +1,6 @@
+// theme presets and their accent colors
+// neutral tokens (sidebar bg, text colors) stay fixed across presets
+
 import type { ThemePreset } from "../types";
 
 export const PRESETS: Record<ThemePreset, { accent: string; label: string }> = {
@@ -6,4 +9,5 @@ export const PRESETS: Record<ThemePreset, { accent: string; label: string }> = {
   rust: { accent: "#a04a1f", label: "Rust" },
 };
 
+// order used by the topbar buttons
 export const PRESET_ORDER: ThemePreset[] = ["blue", "teal", "rust"];

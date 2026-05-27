@@ -1,3 +1,6 @@
+// top-level component, wires topbar + editor + preview together
+// also owns the photo slot (kept in memory, never persisted) and the zoom state
+
 import { useRef, useState } from "react";
 import { Editor } from "./editor/Editor";
 import { Preview } from "./preview/Preview";
@@ -12,10 +15,14 @@ import {
 import { exportCvPdf } from "./pdf/exportPdf";
 
 function App() {
+  // photo lives in app state only, not in the CV document
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
+
+  // refs we need for export (preview DOM) and load (hidden file input)
   const previewRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   const doc = useCV();
   const dispatch = useCVDispatch();
 
@@ -50,6 +57,7 @@ function App() {
     dispatch({ type: "RESET" });
   };
 
+  // export PDF, while temporarily hiding the overflow indicator and resetting zoom
   const handleExport = async () => {
     const el = previewRef.current;
     if (!el) return;
@@ -76,6 +84,8 @@ function App() {
         onReset={handleReset}
         onExport={handleExport}
       />
+
+      {/* hidden file input, opened by the Load button */}
       <input
         ref={fileInputRef}
         type="file"
@@ -87,6 +97,7 @@ function App() {
           e.target.value = "";
         }}
       />
+
       <main className="panes">
         <section className="editor-pane" aria-label="Editor">
           <Editor photoUrl={photoUrl} onPhotoChange={setPhotoUrl} />

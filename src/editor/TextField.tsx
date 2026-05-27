@@ -1,3 +1,5 @@
+// labeled single-line text input, used all over the editor
+
 type Props = {
   label: string;
   value: string;

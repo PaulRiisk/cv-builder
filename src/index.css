@@ -1,6 +1,9 @@
+/* app chrome styles: topbar, panes, preview toolbar
+   UI tokens here only color the editor and topbar, never the A4 preview */
+
+/* light mode tokens */
 :root {
   color-scheme: light;
-  /* UI tokens — these only affect the app chrome, not the A4 preview. */
   --ui-bg: #f5f5f5;
   --ui-text: #1a1a1a;
   --ui-text-muted: #555;
@@ -18,6 +21,7 @@
   --ui-helper: #777;
 }
 
+/* dark mode tokens, applied when html has data-theme="dark" */
 [data-theme="dark"] {
   color-scheme: dark;
   --ui-bg: #15171b;
@@ -57,12 +61,14 @@ body {
   background: var(--ui-bg);
 }
 
+/* outer app shell: topbar on top, two panes below */
 .app {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
+/* topbar */
 .topbar {
   display: flex;
   align-items: center;
@@ -114,6 +120,7 @@ body {
   background: var(--ui-hover);
 }
 
+/* two-pane body: editor left, preview right */
 .panes {
   display: flex;
   flex: 1;
@@ -139,6 +146,7 @@ body {
   gap: 12px;
 }
 
+/* zoom toolbar that floats above the preview page */
 .preview-toolbar {
   position: sticky;
   top: 0;

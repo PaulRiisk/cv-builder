@@ -1,3 +1,7 @@
+// provides the CV document and dispatch to the whole app
+// state and dispatch are split into two contexts so components that only
+// dispatch don't re-render when the doc changes
+
 import {
   createContext,
   useContext,
@@ -16,6 +20,7 @@ type Dispatch = (action: Action) => void;
 const CVStateContext = createContext<CVDocument | null>(null);
 const CVDispatchContext = createContext<Dispatch | null>(null);
 
+// hydrate from localStorage if available, otherwise start fresh
 function initDocument(): CVDocument {
   return loadFromLocalStorage() ?? createDefaultDocument();
 }
@@ -23,6 +28,7 @@ function initDocument(): CVDocument {
 export function CVProvider({ children }: { children: ReactNode }) {
   const [doc, dispatch] = useReducer(cvReducer, undefined, initDocument);
 
+  // debounce-save the doc on every change so we don't hammer localStorage
   const saveTimer = useRef<number | null>(null);
   useEffect(() => {
     if (saveTimer.current !== null) {
@@ -47,6 +53,7 @@ export function CVProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// hooks throw if used outside the provider so we fail loud, not silent
 export function useCV(): CVDocument {
   const ctx = useContext(CVStateContext);
   if (!ctx) throw new Error("useCV must be used inside <CVProvider>");

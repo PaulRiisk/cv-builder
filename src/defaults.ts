@@ -1,3 +1,6 @@
+// fresh placeholder document, used on first load and on reset
+// no personal data here, all values are generic stand-ins
+
 import type { CVDocument } from "./types";
 import { newId } from "./types";
 

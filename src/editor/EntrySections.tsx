@@ -1,3 +1,6 @@
+// editor section for the main column on the CV (experience, education, ...)
+// each section can be renamed, moved, removed, and holds a list of entries
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import { EntryEditor } from "./EntryEditor";
 
@@ -9,6 +12,7 @@ export function EntrySections() {
     <>
       {entrySections.map((section, sectionIndex) => (
         <div className="editor-section" key={section.id}>
+          {/* section header: rename, move, remove */}
           <div className="entry-section-header">
             <input
               type="text"
@@ -64,6 +68,7 @@ export function EntrySections() {
             </button>
           </div>
 
+          {/* one editor per entry, plus an add button at the bottom */}
           {section.entries.map((entry, entryIndex) => (
             <EntryEditor
               key={entry.id}

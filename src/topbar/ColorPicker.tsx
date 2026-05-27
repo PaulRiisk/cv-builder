@@ -1,3 +1,5 @@
+// native color input wired to the accent token
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 
 export function ColorPicker() {

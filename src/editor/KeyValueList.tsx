@@ -1,3 +1,6 @@
+// reusable list of label/value rows with move + remove buttons
+// shared by contact rows and sidebar section rows
+
 import type { Direction } from "../types";
 
 type Row = { id: string; label: string; value: string };
@@ -27,6 +30,7 @@ export function KeyValueList({
     <div>
       {rows.map((row, i) => (
         <div className="kv-row" key={row.id}>
+          {/* label and value inputs */}
           <input
             type="text"
             value={row.label}
@@ -39,6 +43,7 @@ export function KeyValueList({
             placeholder={valuePlaceholder}
             onChange={(e) => onUpdate(row.id, { value: e.target.value })}
           />
+          {/* up/down/delete row controls, disabled at the ends */}
           <button
             type="button"
             className="row-btn"

@@ -1,3 +1,6 @@
+// the A4 page itself, forwards a ref so App can grab the DOM for PDF export
+// applies the accent color and zoom as CSS variables so the CSS does the work
+
 import { forwardRef } from "react";
 import { useCV } from "../state/CVContext";
 import { PreviewSidebar } from "./PreviewSidebar";
@@ -14,6 +17,7 @@ export const Preview = forwardRef<HTMLDivElement, Props>(function Preview(
   ref,
 ) {
   const doc = useCV();
+  // fall back to the bundled placeholder if no photo is uploaded
   const src = photoUrl ?? `${import.meta.env.BASE_URL}placeholder_cv.png`;
 
   return (

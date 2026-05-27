@@ -1,3 +1,6 @@
+// photo upload + on/off toggle
+// the photo data URL lives in app state, never persisted to disk
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 
 type Props = {
@@ -9,6 +12,7 @@ export function PhotoField({ photoUrl, onChange }: Props) {
   const { photoEnabled } = useCV();
   const dispatch = useCVDispatch();
 
+  // read the picked file as a data URL so we can inline it as an img src
   const handleFile = (file: File) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -38,6 +42,7 @@ export function PhotoField({ photoUrl, onChange }: Props) {
         </label>
       </div>
 
+      {/* upload UI is hidden when the user disables the photo on the CV */}
       {photoEnabled && (
         <>
           <img

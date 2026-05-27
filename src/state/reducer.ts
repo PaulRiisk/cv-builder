@@ -1,3 +1,6 @@
+// all document mutations live here as a typed action union
+// every action returns a new CVDocument, no in-place mutation
+
 import type {
   CVDocument,
   ContactRow,
@@ -71,6 +74,7 @@ export type Action =
   | { type: "LOAD_DOCUMENT"; doc: CVDocument }
   | { type: "RESET" };
 
+// swap two neighbours in a list, no-op if the target index is out of range
 function move<T>(list: T[], index: number, direction: Direction): T[] {
   const target = direction === "up" ? index - 1 : index + 1;
   if (index < 0 || target < 0 || target >= list.length) return list;
@@ -79,6 +83,7 @@ function move<T>(list: T[], index: number, direction: Direction): T[] {
   return next;
 }
 
+// find by id and delegate to move
 function moveById<T extends { id: string }>(
   list: T[],
   id: string,
@@ -91,6 +96,7 @@ function moveById<T extends { id: string }>(
 
 export function cvReducer(state: CVDocument, action: Action): CVDocument {
   switch (action.type) {
+    // top-level text fields
     case "SET_NAME":
       return { ...state, name: action.value };
     case "SET_TITLE":
@@ -98,6 +104,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
     case "SET_PROFILE":
       return { ...state, profile: action.value };
 
+    // contact rows
     case "ADD_CONTACT":
       return {
         ...state,
@@ -121,6 +128,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         contact: moveById(state.contact, action.id, action.direction),
       };
 
+    // skill groups
     case "ADD_SKILL_GROUP": {
       const group: SkillGroup = { id: newId(), heading: "new group", items: [] };
       return { ...state, skillGroups: [...state.skillGroups, group] };
@@ -143,7 +151,9 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         skillGroups: moveById(state.skillGroups, action.id, action.direction),
       };
 
+    // individual skills inside a group
     case "ADD_SKILL": {
+      // ignore empty input so the user can't accidentally add blank chips
       const item = action.item.trim();
       if (!item) return state;
       return {
@@ -172,6 +182,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         ),
       };
 
+    // sidebar sections (languages, etc.)
     case "ADD_SIDEBAR_SECTION": {
       const section: SidebarSection = {
         id: newId(),
@@ -202,6 +213,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         ),
       };
 
+    // rows inside a sidebar section
     case "ADD_SIDEBAR_ROW":
       return {
         ...state,
@@ -247,6 +259,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         ),
       };
 
+    // entry sections (experience, education, ...)
     case "ADD_ENTRY_SECTION": {
       const section: EntrySection = {
         id: newId(),
@@ -277,6 +290,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         ),
       };
 
+    // entries inside an entry section
     case "ADD_ENTRY":
       return {
         ...state,
@@ -337,6 +351,7 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
         ),
       };
 
+    // theme: preset overwrites the accent, picker only touches accent
     case "SET_THEME_PRESET":
       return {
         ...state,
@@ -345,11 +360,13 @@ export function cvReducer(state: CVDocument, action: Action): CVDocument {
     case "SET_ACCENT":
       return { ...state, theme: { ...state.theme, accent: action.accent } };
 
+    // layout mode and photo visibility
     case "SET_MODE":
       return { ...state, mode: action.mode };
     case "SET_PHOTO_ENABLED":
       return { ...state, photoEnabled: action.enabled };
 
+    // replace state from a loaded file or reset back to defaults
     case "LOAD_DOCUMENT":
       return action.doc;
     case "RESET":

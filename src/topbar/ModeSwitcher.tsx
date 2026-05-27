@@ -1,3 +1,5 @@
+// segmented control for the layout mode (dev vs classic)
+
 import { useCV, useCVDispatch } from "../state/CVContext";
 import type { LayoutMode } from "../types";
 

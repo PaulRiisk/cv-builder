@@ -1,3 +1,6 @@
+// top bar: mode, theme, save/load/reset, PDF export, light/dark toggle
+// most controls have their own component, this is just the layout
+
 import { ThemePresets } from "./ThemePresets";
 import { ColorPicker } from "./ColorPicker";
 import { ModeSwitcher } from "./ModeSwitcher";
@@ -12,6 +15,7 @@ type Props = {
 };
 
 export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
+  // UI theme (light/dark for the app chrome, not the CV preview)
   const [uiTheme, toggleUiTheme] = useUiTheme();
   const isDark = uiTheme === "dark";
 
@@ -24,6 +28,7 @@ export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
       <span className="topbar-divider" />
       <ColorPicker />
       <span className="topbar-divider" />
+      {/* file + export actions */}
       <button type="button" onClick={onSave}>
         Save
       </button>
@@ -36,6 +41,7 @@ export function Topbar({ onSave, onLoad, onReset, onExport }: Props) {
       <button type="button" onClick={onExport}>
         Export PDF
       </button>
+      {/* sun/moon toggle for light/dark UI */}
       <button
         type="button"
         className="theme-toggle"

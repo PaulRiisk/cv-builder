@@ -4,10 +4,13 @@ import { PreviewSidebar } from "./PreviewSidebar";
 import { PreviewMain } from "./PreviewMain";
 import "./preview.css";
 
-type Props = { photoUrl?: string | null };
+type Props = {
+  photoUrl?: string | null;
+  zoom?: number;
+};
 
 export const Preview = forwardRef<HTMLDivElement, Props>(function Preview(
-  { photoUrl },
+  { photoUrl, zoom = 1 },
   ref,
 ) {
   const doc = useCV();
@@ -18,7 +21,10 @@ export const Preview = forwardRef<HTMLDivElement, Props>(function Preview(
       ref={ref}
       className="cv-preview-root"
       data-mode={doc.mode}
-      style={{ ["--accent" as string]: doc.theme.accent }}
+      style={{
+        ["--accent" as string]: doc.theme.accent,
+        ["--zoom" as string]: zoom,
+      }}
     >
       <main className="page">
         <PreviewSidebar photoUrl={src} />

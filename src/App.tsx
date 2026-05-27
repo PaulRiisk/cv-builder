@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Editor } from "./editor/Editor";
 import { Preview } from "./preview/Preview";
+import { PreviewToolbar } from "./preview/PreviewToolbar";
 import { Topbar } from "./topbar/Topbar";
 import { useCV, useCVDispatch } from "./state/CVContext";
 import {
@@ -12,6 +13,7 @@ import { exportCvPdf } from "./pdf/exportPdf";
 
 function App() {
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(1);
   const previewRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const doc = useCV();
@@ -51,11 +53,18 @@ function App() {
   const handleExport = async () => {
     const el = previewRef.current;
     if (!el) return;
+    el.classList.add("pdf-exporting");
+    const prevZoom = el.style.getPropertyValue("--zoom");
+    el.style.setProperty("--zoom", "1");
     try {
       await exportCvPdf(el, doc.name);
     } catch (err) {
       const message = err instanceof Error ? err.message : "PDF export failed.";
       window.alert(message);
+    } finally {
+      el.classList.remove("pdf-exporting");
+      if (prevZoom) el.style.setProperty("--zoom", prevZoom);
+      else el.style.removeProperty("--zoom");
     }
   };
 
@@ -83,7 +92,8 @@ function App() {
           <Editor photoUrl={photoUrl} onPhotoChange={setPhotoUrl} />
         </section>
         <section className="preview-pane" aria-label="Preview">
-          <Preview ref={previewRef} photoUrl={photoUrl} />
+          <PreviewToolbar zoom={zoom} onZoomChange={setZoom} />
+          <Preview ref={previewRef} photoUrl={photoUrl} zoom={zoom} />
         </section>
       </main>
     </div>

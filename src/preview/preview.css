@@ -9,6 +9,7 @@
 
 .cv-preview-root {
   color-scheme: light;
+  zoom: var(--zoom, 1);
   --accent: #2046c6;
   --page-bg: #f7f8fb;
   --sidebar-bg: #eef1f6;
@@ -47,12 +48,56 @@
 
 /* ── Page ────────────────────────────────────────────────── */
 .cv-preview-root .page {
+  position: relative;
   width: var(--page-w);
   min-height: var(--page-h);
   background: var(--page-bg);
   display: grid;
   grid-template-columns: 34% 1fr;
   box-shadow: 0 8px 32px rgba(14, 19, 32, 0.08);
+}
+
+/* A4 overflow indicator: visible only when content extends past A4 height.
+   Positioned at the A4 boundary, fills the overflow area with a tint and a
+   red top border. Hidden during PDF export via .pdf-exporting on the root. */
+.cv-preview-root .page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--page-h);
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(220, 60, 60, 0.06) 0,
+    rgba(220, 60, 60, 0.06) 6px,
+    rgba(220, 60, 60, 0.12) 6px,
+    rgba(220, 60, 60, 0.12) 12px
+  );
+  border-top: 1px dashed rgba(200, 40, 40, 0.7);
+}
+
+.cv-preview-root .page::after {
+  content: "Beyond A4 — won't appear in PDF";
+  position: absolute;
+  left: 50%;
+  top: calc(var(--page-h) + 8px);
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(160, 30, 30, 0.85);
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(200, 40, 40, 0.4);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* During PDF export, hide the overflow markers. */
+.cv-preview-root.pdf-exporting .page::before,
+.cv-preview-root.pdf-exporting .page::after {
+  display: none;
 }
 
 /* ── Sidebar ─────────────────────────────────────────────── */
